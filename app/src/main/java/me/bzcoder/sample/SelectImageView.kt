@@ -1,8 +1,8 @@
 package me.bzcoder.sample
 
 import android.content.Context
-import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatImageView
 
 /**
  * 选择时会变成半透明的ImageView
@@ -14,9 +14,9 @@ class SelectImageView : AppCompatImageView {
     private var pressedAlpha = 0.4f
     private var unableAlpha = 0.3f
 
-    constructor(context: Context?) : super(context) {}
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     override fun drawableStateChanged() {
         super.drawableStateChanged()

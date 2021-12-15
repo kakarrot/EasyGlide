@@ -1,11 +1,13 @@
 package me.bzcoder.easyglide.progress
 
 import android.text.TextUtils
+import me.bzcoder.easyglide.http.UnsafeOkHttpClient
 import me.bzcoder.easyglide.progress.ProgressResponseBody.InternalProgressListener
 import okhttp3.Call
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.TimeUnit
 
 /**
  * 进度监听器管理类
@@ -15,13 +17,13 @@ import java.util.concurrent.ConcurrentHashMap
  */
 object ProgressManager {
     private val listenersMap = ConcurrentHashMap<String, OnProgressListener>()
-    var okHttpClient: Call.Factory = OkHttpClient.Builder().addNetworkInterceptor { chain: Interceptor.Chain ->
+    var okHttpClient: Call.Factory = UnsafeOkHttpClient.builder.addNetworkInterceptor { chain: Interceptor.Chain ->
         val request = chain.request()
         val response = chain.proceed(request)
         response.newBuilder().run {
-            val body = response.body()
+            val body = response.body
             if (body != null) {
-                this.body(ProgressResponseBody(request.url().toString(), LISTENER, body))
+                this.body(ProgressResponseBody(request.url.toString(), LISTENER, body))
             }
             this.build()
         }

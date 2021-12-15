@@ -23,7 +23,7 @@ object SSLSocketClient {
 
     //获取HostnameVerifier
     val hostnameVerifier: HostnameVerifier
-        get() = HostnameVerifier { s, sslSession -> true }
+        get() = HostnameVerifier { _, _ -> true }
 
     val trustManager: X509TrustManager
         get() = MyTrustManager()

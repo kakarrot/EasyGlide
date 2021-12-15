@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import com.bumptech.glide.load.Key
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
@@ -19,9 +19,9 @@ import java.security.MessageDigest
 class BlurTransformation @JvmOverloads constructor(private val context: Context, radius: Int = MAX_RADIUS, sampling: Int = DEFAULT_SAMPLING) : BitmapTransformation() {
     private val ID = javaClass.name
     private val radius //模糊半径0～25
-            : Int
+            : Int = if (radius > MAX_RADIUS) MAX_RADIUS else radius
     private val sampling //取样0～25
-            : Int
+            : Int = if (sampling > MAX_RADIUS) MAX_RADIUS else sampling
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap {
@@ -35,11 +35,8 @@ class BlurTransformation @JvmOverloads constructor(private val context: Context,
         val paint = Paint()
         paint.flags = Paint.FILTER_BITMAP_FLAG
         canvas.drawBitmap(toTransform, 0f, 0f, paint)
-        bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        bitmap =
             BlurUtils.rsBlur(context, bitmap, radius)
-        } else {
-            BlurUtils.blur(bitmap, radius)!!
-        }
         return bitmap
     }
 
@@ -64,8 +61,4 @@ class BlurTransformation @JvmOverloads constructor(private val context: Context,
         private const val DEFAULT_SAMPLING = 1
     }
 
-    init {
-        this.radius = if (radius > MAX_RADIUS) MAX_RADIUS else radius
-        this.sampling = if (sampling > MAX_RADIUS) MAX_RADIUS else sampling
-    }
 }

@@ -1,38 +1,33 @@
 package me.bzcoder.sample
 
-import android.Manifest
-import android.animation.ValueAnimator
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.animation.LinearInterpolator
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import kotlinx.android.synthetic.main.activity_main.*
 import me.bzcoder.easyglide.EasyGlide
-import me.bzcoder.easyglide.EasyGlide.downloadImageToGallery
 import me.bzcoder.easyglide.EasyGlide.loadBlurImage
 import me.bzcoder.easyglide.EasyGlide.loadBorderImage
 import me.bzcoder.easyglide.EasyGlide.loadCircleImage
 import me.bzcoder.easyglide.EasyGlide.loadCircleWithBorderImage
 import me.bzcoder.easyglide.EasyGlide.loadGrayImage
+
 import me.bzcoder.easyglide.EasyGlide.loadImage
 import me.bzcoder.easyglide.EasyGlide.loadImageWithTransformation
 import me.bzcoder.easyglide.EasyGlide.loadResizeXYImage
 import me.bzcoder.easyglide.EasyGlide.loadRoundCornerImage
+import me.bzcoder.easyglide.progress.CircleProgressView
 import me.bzcoder.easyglide.progress.OnProgressListener
 import me.bzcoder.easyglide.sample.R
 import me.bzcoder.easyglide.transformation.BlurTransformation
 import me.bzcoder.easyglide.transformation.GrayscaleTransformation
 import me.bzcoder.easyglide.transformation.RoundedCornersTransformation
-import pub.devrel.easypermissions.AfterPermissionGranted
-import pub.devrel.easypermissions.EasyPermissions
-
 
 /**
  * Kotlin Sample功能
@@ -48,6 +43,56 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
+    }
+
+    private val circleProgressView: CircleProgressView by lazy {
+        findViewById(R.id.circleProgressView)
+    }
+
+    private val iv_0: ImageView by lazy {
+        findViewById(R.id.iv_0)
+    }
+
+    private val iv_1: ImageView by lazy {
+        findViewById(R.id.iv_1)
+    }
+
+    private val iv_2: ImageView by lazy {
+        findViewById(R.id.iv_2)
+    }
+
+    private val iv_3 by lazy {
+        findViewById<ImageView>(R.id.iv_3)
+    }
+    private val iv_4 by lazy {
+        findViewById<ImageView>(R.id.iv_4)
+    }
+    private val iv_5 by lazy {
+        findViewById<ImageView>(R.id.iv_5)
+    }
+    private val iv_6 by lazy {
+        findViewById<ImageView>(R.id.iv_6)
+    }
+    private val iv_7 by lazy {
+        findViewById<ImageView>(R.id.iv_7)
+    }
+    private val iv_8 by lazy {
+        findViewById<ImageView>(R.id.iv_8)
+    }
+    private val iv_9 by lazy {
+        findViewById<ImageView>(R.id.iv_9)
+    }
+    private val iv_10 by lazy {
+        findViewById<ImageView>(R.id.iv_10)
+    }
+    private val iv_11 by lazy {
+        findViewById<ImageView>(R.id.iv_11)
+    }
+    private val iv_12 by lazy {
+        findViewById<ImageView>(R.id.iv_12)
+    }
+    private val iv_13 by lazy {
+        findViewById<ImageView>(R.id.iv_13)
     }
 
     private fun initView() {
@@ -98,21 +143,10 @@ class MainActivity : AppCompatActivity() {
         iv_13.loadBorderImage(this, url2)
     }
 
-    private fun hasStoragePermission(): Boolean {
-        return EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    }
+    private fun hasStoragePermission() = true
 
-    @AfterPermissionGranted(WRITE_EXTERNAL_PERM)
     private fun downloadImage() {
-        if (hasStoragePermission()) {
-            downloadImageToGallery(iv_1.context, url3)
-        } else {
-            EasyPermissions.requestPermissions(
-                    this,
-                    getString(R.string.need_write_external),
-                    WRITE_EXTERNAL_PERM,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
+        //downloadImage(iv_1.context, url3)
     }
 
     companion object {

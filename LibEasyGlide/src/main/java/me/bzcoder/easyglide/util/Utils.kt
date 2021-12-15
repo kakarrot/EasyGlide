@@ -4,10 +4,10 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorRes
 import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import androidx.annotation.ColorRes
 
 object Utils {
     private var windowManager: WindowManager? = null
@@ -89,7 +89,7 @@ object Utils {
         paint.textAlign = Paint.Align.CENTER
         val fontMetrics = paint.fontMetricsInt
         val baseline = (rect.bottom + rect.top - fontMetrics.bottom - fontMetrics.top) / 2
-        canvas.drawText(text, rect.centerX(), baseline, paint)
+        canvas.drawText(text ?: "", rect.centerX(), baseline, paint)
         return bitmap
     }
 
